@@ -49,13 +49,15 @@ How could Paris Saint-Germain control the 2026 UEFA Champions League final so st
 From this directory:
 
 ```bash
-python3 run_ucl_final_match_control.py
-python3 -m pytest -q
+python3 run_ucl_final_match_control_expanded.py
+python3 -m pytest -q tests/test_match_control_expanded.py
 ```
+
+The original script remains in the repository. The expanded script is the current published version with the win-probability timeline, Vitinha profile, and substitution contribution figures.
 
 ## Limitations
 
-- Possession, pass, and shot totals vary by provider definition. The report treats them as provider-specific control indicators, not universal physical measurements.
+- Possession, pass, and shot totals vary by provider definition. The report treats them as provider-specific control indicators, not as universal physical measurements.
 - The win-probability curve is a transparent score-state model, not a bookmaker line or an official live feed.
 - This is a descriptive analysis of one match, not a tactical model.
 - Expected goals and shot maps are intentionally excluded until a stable public source can be cited cleanly.
