@@ -1,0 +1,5 @@
+metric,unit,paris,arsenal,source,note,paris_to_arsenal_ratio,difference
+Possession share,%,75.3,24.7,Opta Analyst / OptaJoe,Arsenal possession was reported as 24.7%; Paris share is inferred as 100 minus Arsenal.,3.048582995951417,50.599999999999994
+Total shots,shots,21.0,7.0,Opta Analyst,Opta Analyst reported Paris with 21 shots and Arsenal with seven attempts.,3.0,14.0
+Completed passes,passes,806.0,196.0,Sports Illustrated summary of match statistics,Provider-specific completed-pass count; other public stat feeds list slightly different pass totals.,4.112244897959184,610.0
+Goals after extra time,goals,1.0,1.0,UEFA official match report,The final was 1-1 after extra time before Paris won 4-3 on penalties.,1.0,0.0
