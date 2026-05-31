@@ -4,5 +4,11 @@
   "match_date": "2026-05-30",
   "match": "Paris Saint-Germain vs Arsenal",
   "result": "1-1 after extra time; Paris Saint-Germain won 4-3 on penalties.",
-  "method": "Descriptive comparison of match-control indicators and outcome metrics."
+  "method": "Descriptive comparison of match-control indicators, score-state win probability, player profile, and substitution leverage.",
+  "win_probability_model": {
+    "prematch_paris_probability": 0.56,
+    "assumed_total_goals_to_120": 2.6,
+    "penalty_conversion_probability": 0.75,
+    "caveat": "Model estimate from public events, not an official live win-probability feed."
+  }
 }
