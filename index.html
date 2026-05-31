@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UEFA Champions League Final 2026 Match Control Analysis</title>
+  <style>
+    :root {
+      --text: #17202a;
+      --muted: #667085;
+      --line: #d0d5dd;
+      --paper: #f7f9fc;
+      --accent: #2447a9;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: white;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 22px 64px;
+    }
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      margin: 0 0 16px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 1.35rem;
+      margin: 36px 0 10px;
+    }
+    p {
+      max-width: 860px;
+      margin: 0 0 16px;
+    }
+    .lead {
+      font-size: 1.12rem;
+      color: #344054;
+    }
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: var(--paper);
+      padding: 18px 20px;
+      margin: 24px 0 28px;
+      font-size: 1.1rem;
+    }
+    figure {
+      margin: 28px 0 34px;
+      padding: 0;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--line);
+    }
+    figcaption {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 18px 0;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--paper);
+      font-weight: 650;
+    }
+    ul {
+      padding-left: 22px;
+    }
+    a {
+      color: var(--accent);
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 36px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>UEFA Champions League Final 2026 Match Control Analysis</h1>
+  <p class="lead">Paris Saint-Germain and Arsenal finished 1-1 after extra time on May 30, 2026, before Paris won the penalty shootout 4-3. The data story is not just who won. It is how much match control Paris had before the scoreboard still stayed level for 120 minutes.</p>
+
+  <div class="callout"><strong>Punchline:</strong> Paris had about three times Arsenal's possession share and shot volume, and more than four times the completed passes, but the final still reached penalties at 1-1.</div>
+
+  <h2>Background</h2>
+  <p>The Union of European Football Associations (UEFA) match report records the final as Paris Saint-Germain 1-1 Arsenal after extra time, with Paris winning 4-3 on penalties at the Puskas Arena in Budapest. Arsenal led through Kai Havertz in the sixth minute. Paris equalized through an Ousmane Dembele penalty in the 65th minute.</p>
+
+  <h2>Purpose</h2>
+  <p>This analysis separates match control from match outcome. The goal is to show, in a few readable figures, how a final can be statistically one-sided in possession, shots, and passing volume, while still being decided by one kick in a shootout.</p>
+
+  <h2>Method</h2>
+  <p>The project uses a small, source-cited table rather than storing a heavy raw feed. Match outcome and key events come from UEFA. Control indicators come from public Opta-derived reporting: Arsenal's 24.7% possession figure, Paris' 21-7 shot advantage, and the 806-196 completed-pass comparison. Paris' possession share is inferred as 100% minus Arsenal's reported share.</p>
+
+  <h2>Results</h2>
+  <table><tr><th>Metric</th><th>Paris Saint-Germain</th><th>Arsenal</th><th>Paris / Arsenal</th><th>Source</th></tr>
+<tr><td>Possession share</td><td>75.3%</td><td>24.7%</td><td>3.05x</td><td>Opta Analyst / OptaJoe</td></tr>
+<tr><td>Total shots</td><td>21</td><td>7</td><td>3.00x</td><td>Opta Analyst</td></tr>
+<tr><td>Completed passes</td><td>806</td><td>196</td><td>4.11x</td><td>Sports Illustrated summary of match statistics</td></tr>
+<tr><td>Goals after extra time</td><td>1</td><td>1</td><td>1.00x</td><td>UEFA official match report</td></tr></table>
+  <figure><img src="outputs/figures/team_control_snapshot.png" alt="Team control metrics for Paris Saint-Germain and Arsenal"><figcaption>Paris led the main match-control indicators by a wide margin.</figcaption></figure>
+<figure><img src="outputs/figures/control_gap_vs_scoreline.png" alt="Paris to Arsenal ratio for control metrics and score after extra time"><figcaption>The control gap was roughly three to four times larger, while the 120-minute score stayed level.</figcaption></figure>
+<figure><img src="outputs/figures/match_timeline.png" alt="Timeline of main events in the 2026 UEFA Champions League final"><figcaption>Arsenal scored early; Paris equalized from a second-half penalty and kept pressing without breaking the 1-1 scoreline.</figcaption></figure>
+<figure><img src="outputs/figures/penalty_shootout_sequence.png" alt="Penalty shootout sequence for Paris Saint-Germain and Arsenal"><figcaption>The trophy was decided by a narrow shootout after a lopsided control profile.</figcaption></figure>
+
+  <h2>Interpretation</h2>
+  <p>The clearest read is that Paris controlled the match environment, but did not turn that control into scoreboard separation. Arsenal scored early, defended deep, and kept Paris to one goal across normal and extra time. That makes the final a useful example of the gap between territorial control and outcome control.</p>
+  <p>The completed-pass gap is especially strong: Paris completed more than four passes for every one Arsenal completed. The shot gap is also large, but the 120-minute score stayed 1-1. That tension is the main story for a public data post.</p>
+
+  <h2>Limitations</h2>
+  <ul>
+    <li>Possession, pass, and shot counts can differ by provider definitions. This report keeps the provider notes visible rather than blending incompatible feeds.</li>
+    <li>This is a descriptive analysis of one final, not a tactical model or player-evaluation model.</li>
+    <li>Expected goals and shot locations are not included because the most accessible public xG values were less directly sourceable than the control metrics used here.</li>
+  </ul>
+
+  <h2>Next Steps</h2>
+  <ul>
+    <li>Add shot-location or expected-goals data if a stable public source is available.</li>
+    <li>Compare this final with other Champions League finals that reached penalties.</li>
+    <li>Build a small benchmark of finals where control metrics and final score diverged sharply.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <ul>
+    <li><a href="https://www.uefa.com/uefachampionsleague/news/02a5-20c02e59f219-15e92acdc717-1000--paris-retain-champions-league-holders-edge-arsenal-on-pena/">UEFA official match report</a>: Final score, timeline events, penalty failures, and player of the match.</li>
+<li><a href="https://theanalyst.com/articles/psg-vs-arsenal-champions-league-final-stats">Opta Analyst match report</a>: Shots, possession record, first-half pass fact, and shootout sequence.</li>
+<li><a href="https://www.si.com/soccer/arsenal-extend-unwanted-champions-league-record-after-heartbreaking-final-defeat">Sports Illustrated match-stat summary</a>: Completed-pass comparison and Opta possession note.</li>
+  </ul>
+
+  <p class="meta">Source check date: 2026-05-30. Generated from <code>run_ucl_final_match_control.py</code>.</p>
+</main>
+</body>
+</html>
