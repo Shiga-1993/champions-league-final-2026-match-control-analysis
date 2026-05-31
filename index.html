@@ -98,7 +98,7 @@
   <h1>UEFA Champions League Final 2026 Match Control Analysis</h1>
   <p class="lead">Paris Saint-Germain and Arsenal finished 1-1 after extra time on May 30, 2026, before Paris won the penalty shootout 4-3. The data story is not just who won. It is how much match control Paris had before the scoreboard still stayed level for 120 minutes.</p>
 
-  <div class="callout"><strong>Punchline:</strong> Paris had about three times Arsenal's possession share and shot volume, and more than four times the completed passes, but the final still reached penalties at 1-1.</div>
+  <div class="callout"><strong>Punchline:</strong> Paris had about three times Arsenal's possession share and shot volume, and more than four times the completed passes, but the final still reached penalties at 1-1. A simple score-state win-probability model flips toward Arsenal after the sixth-minute goal, then returns toward a coin flip after Paris equalizes.</div>
 
   <h2>Background</h2>
   <p>The Union of European Football Associations (UEFA) match report records the final as Paris Saint-Germain 1-1 Arsenal after extra time, with Paris winning 4-3 on penalties at the Puskas Arena in Budapest. Arsenal led through Kai Havertz in the sixth minute. Paris equalized through an Ousmane Dembele penalty in the 65th minute.</p>
@@ -107,7 +107,8 @@
   <p>This analysis separates match control from match outcome. The goal is to show, in a few readable figures, how a final can be statistically one-sided in possession, shots, and passing volume, while still being decided by one kick in a shootout.</p>
 
   <h2>Method</h2>
-  <p>The project uses a small, source-cited table rather than storing a heavy raw feed. Match outcome and key events come from UEFA. Control indicators come from public Opta-derived reporting: Arsenal's 24.7% possession figure, Paris' 21-7 shot advantage, and the 806-196 completed-pass comparison. Paris' possession share is inferred as 100% minus Arsenal's reported share.</p>
+  <p>The project uses small, source-cited tables rather than storing a heavy raw feed. Match outcome, key events, substitutions, and Player of the Match context come from UEFA. Control indicators come from public Opta-derived reporting: Arsenal's 24.7% possession figure, Paris' 21-7 shot advantage, and the 806-196 completed-pass comparison. Paris' possession share is inferred as 100% minus Arsenal's reported share.</p>
+  <p>The win-probability curve is a simple model, not an official live feed. It starts from an Opta pre-match forecast of 56% for Paris, uses a Poisson score-state model to 120 minutes, and treats a tied match after extra time as a 50/50 shootout before applying the actual penalty sequence with a neutral 75% conversion assumption for remaining kicks.</p>
 
   <h2>Results</h2>
   <table><tr><th>Metric</th><th>Paris Saint-Germain</th><th>Arsenal</th><th>Paris / Arsenal</th><th>Source</th></tr>
@@ -117,16 +118,63 @@
 <tr><td>Goals after extra time</td><td>1</td><td>1</td><td>1.00x</td><td>UEFA official match report</td></tr></table>
   <figure><img src="outputs/figures/team_control_snapshot.png" alt="Team control metrics for Paris Saint-Germain and Arsenal"><figcaption>Paris led the main match-control indicators by a wide margin.</figcaption></figure>
 <figure><img src="outputs/figures/control_gap_vs_scoreline.png" alt="Paris to Arsenal ratio for control metrics and score after extra time"><figcaption>The control gap was roughly three to four times larger, while the 120-minute score stayed level.</figcaption></figure>
-<figure><img src="outputs/figures/match_timeline.png" alt="Timeline of main events in the 2026 UEFA Champions League final"><figcaption>Arsenal scored early; Paris equalized from a second-half penalty and kept pressing without breaking the 1-1 scoreline.</figcaption></figure>
+<figure><img src="outputs/figures/win_probability_timeline.png" alt="Estimated trophy probability timeline for Paris Saint-Germain and Arsenal"><figcaption>Model estimate from score state and shootout state. This is not an official live win-probability feed.</figcaption></figure>
+<figure><img src="outputs/figures/match_timeline_numbered.png" alt="Numbered timeline of main events in the 2026 UEFA Champions League final"><figcaption>Numbered markers avoid placing long labels over the event timeline. Details are listed below.</figcaption></figure>
+<figure><img src="outputs/figures/vitinha_profile.png" alt="Vitinha Champions League per 90 profile"><figcaption>Vitinha season profile explains why his Player of the Match selection fits the match-control story.</figcaption></figure>
+<figure><img src="outputs/figures/substitution_leverage.png" alt="Substitution timing and penalty contribution"><figcaption>Several late substitutions mattered most through penalty responsibilities rather than open-play volume.</figcaption></figure>
 <figure><img src="outputs/figures/penalty_shootout_sequence.png" alt="Penalty shootout sequence for Paris Saint-Germain and Arsenal"><figcaption>The trophy was decided by a narrow shootout after a lopsided control profile.</figcaption></figure>
+  <h2>Event Key</h2>
+  <table><tr><th>#</th><th>Minute</th><th>Phase</th><th>Team</th><th>Event</th><th>Score</th></tr>
+<tr><td>1</td><td>6</td><td>First half</td><td>Arsenal</td><td>Kai Havertz goal</td><td>Paris 0-1 Arsenal</td></tr>
+<tr><td>2</td><td>65</td><td>Second half</td><td>Paris Saint-Germain</td><td>Ousmane Dembele penalty</td><td>Paris 1-1 Arsenal</td></tr>
+<tr><td>3</td><td>77</td><td>Second half</td><td>Paris Saint-Germain</td><td>Kvaratskhelia effort deflects onto post</td><td>Paris 1-1 Arsenal</td></tr>
+<tr><td>4</td><td>89</td><td>Second half</td><td>Paris Saint-Germain</td><td>Vitinha late chance</td><td>Paris 1-1 Arsenal</td></tr>
+<tr><td>5</td><td>120</td><td>After extra time</td><td>Both</td><td>Level after extra time</td><td>Paris 1-1 Arsenal</td></tr></table>
+
+  <h2>Win Probability Read</h2>
+  <table><tr><th>Point</th><th>Paris</th><th>Arsenal</th></tr>
+<tr><td>Kickoff</td><td>56.0%</td><td>44.0%</td></tr>
+<tr><td>After Arsenal goal</td><td>31.0%</td><td>69.0%</td></tr>
+<tr><td>After Paris equalizer</td><td>53.7%</td><td>46.3%</td></tr>
+<tr><td>End of normal time</td><td>52.4%</td><td>47.6%</td></tr>
+<tr><td>After extra time</td><td>50.0%</td><td>50.0%</td></tr>
+<tr><td>Before shootout</td><td>50.0%</td><td>50.0%</td></tr>
+<tr><td>Penalty 10: Arsenal Missed</td><td>100.0%</td><td>0.0%</td></tr></table>
+  <p>The model view says Arsenal's early goal mattered more than the aggregate control numbers at that moment. Paris still had the stronger underlying profile, but the clock and score state moved the estimated trophy probability toward Arsenal until the 65th-minute equalizer. Once the match reached penalties at 1-1, the model resets to roughly even before the actual shootout sequence separates the teams.</p>
+
+  <h2>Vitinha</h2>
+  <table><tr><th>Metric</th><th>Value</th><th>Interpretation</th></tr>
+<tr><td>Official final award</td><td>Player of the Match</td><td>The Union of European Football Associations technical observer panel singled out his control of the game.</td></tr>
+<tr><td>Successful passes per 90</td><td>90.6</td><td>Season-long Champions League passing volume shows why Paris could sustain possession through midfield.</td></tr>
+<tr><td>Line-breaking passes per 90</td><td>14.2</td><td>He was not just recycling possession; he repeatedly moved the ball through pressure lines.</td></tr>
+<tr><td>Build-up involvements per 90</td><td>50.3</td><td>High build-up involvement fits the final&#x27;s control profile.</td></tr>
+<tr><td>Progressive carries per 90</td><td>11.6</td><td>Ball-carrying gave Paris another way to advance play when passing lanes narrowed.</td></tr>
+<tr><td>Final event note</td><td>89&#x27; chance; off 106&#x27;</td><td>He remained involved late, then Paris used Lucas Beraldo as a shootout option after substituting him.</td></tr></table>
+  <p>Vitinha's role is the bridge between the team-level data and the player-level story. Paris' control was not only possession for possession's sake. His season profile shows high passing volume, line-breaking passes, build-up involvement, and progressive carries. That makes his Player of the Match selection consistent with the way Paris pinned Arsenal into a low-possession final.</p>
+
+  <h2>Substitutions</h2>
+  <table><tr><th>Team</th><th>Minute</th><th>Player on</th><th>Player off</th><th>Penalty role</th><th>Contribution note</th></tr>
+<tr><td>Paris Saint-Germain</td><td>83</td><td>Bradley Barcola</td><td>Khvicha Kvaratskhelia</td><td>No penalty</td><td>Fresh wide runner during Paris&#x27; late push.</td></tr>
+<tr><td>Arsenal</td><td>66</td><td>Jurrien Timber</td><td>Cristhian Mosquera</td><td>No penalty</td><td>Defensive substitution before Paris equalized.</td></tr>
+<tr><td>Arsenal</td><td>67</td><td>Viktor Gyokeres</td><td>Martin Odegaard</td><td>Scored</td><td>Converted Arsenal&#x27;s first shootout kick.</td></tr>
+<tr><td>Arsenal</td><td>83</td><td>Gabriel Martinelli</td><td>Leandro Trossard</td><td>Scored</td><td>Converted Arsenal&#x27;s fourth shootout kick.</td></tr>
+<tr><td>Arsenal</td><td>83</td><td>Noni Madueke</td><td>Bukayo Saka</td><td>No penalty</td><td>Added a late direct option on the right side.</td></tr>
+<tr><td>Arsenal</td><td>91</td><td>Eberechi Eze</td><td>Kai Havertz</td><td>Missed</td><td>Missed Arsenal&#x27;s second shootout kick.</td></tr>
+<tr><td>Arsenal</td><td>91</td><td>Martin Zubimendi</td><td>Myles Lewis-Skelly</td><td>No penalty</td><td>Extra-time midfield stability.</td></tr>
+<tr><td>Paris Saint-Germain</td><td>96</td><td>Goncalo Ramos</td><td>Ousmane Dembele</td><td>Scored</td><td>Converted Paris&#x27; first shootout kick after entering late.</td></tr>
+<tr><td>Paris Saint-Germain</td><td>95</td><td>Warren Zaire-Emery</td><td>Fabian Ruiz</td><td>No penalty</td><td>Fresh legs in midfield during extra time.</td></tr>
+<tr><td>Paris Saint-Germain</td><td>106</td><td>Illya Zabarnyi</td><td>Marquinhos</td><td>No penalty</td><td>Late defensive reset before the shootout.</td></tr>
+<tr><td>Paris Saint-Germain</td><td>106</td><td>Lucas Beraldo</td><td>Vitinha</td><td>Scored</td><td>Converted Paris&#x27; fifth shootout kick.</td></tr></table>
+  <p>The substitutes changed the match less through open-play goals than through the shootout. Paris got converted penalties from late entrants Goncalo Ramos and Lucas Beraldo. Arsenal got converted penalties from Viktor Gyokeres and Gabriel Martinelli, but Eberechi Eze's miss created the first major shootout break toward Paris.</p>
 
   <h2>Interpretation</h2>
-  <p>The clearest read is that Paris controlled the match environment, but did not turn that control into scoreboard separation. Arsenal scored early, defended deep, and kept Paris to one goal across normal and extra time. That makes the final a useful example of the gap between territorial control and outcome control.</p>
+  <p>The clearest read is that Paris controlled the match environment, but did not turn that control into scoreboard separation. Arsenal scored early, defended deep, and kept Paris to one goal across normal and extra time. The win-probability model adds the time dimension: control was one-sided in aggregate, but the game state was not stable for Paris until the equalizer.</p>
   <p>The completed-pass gap is especially strong: Paris completed more than four passes for every one Arsenal completed. The shot gap is also large, but the 120-minute score stayed 1-1. That tension is the main story for a public data post.</p>
 
   <h2>Limitations</h2>
   <ul>
     <li>Possession, pass, and shot counts can differ by provider definitions. This report keeps the provider notes visible rather than blending incompatible feeds.</li>
+    <li>The win-probability curve is a transparent model from score state and penalty state. It is not a bookmaker probability, an Opta live probability feed, or a tactical simulation.</li>
     <li>This is a descriptive analysis of one final, not a tactical model or player-evaluation model.</li>
     <li>Expected goals and shot locations are not included because the most accessible public xG values were less directly sourceable than the control metrics used here.</li>
   </ul>
@@ -140,9 +188,11 @@
 
   <h2>Sources</h2>
   <ul>
-    <li><a href="https://www.uefa.com/uefachampionsleague/news/02a5-20c02e59f219-15e92acdc717-1000--paris-retain-champions-league-holders-edge-arsenal-on-pena/">UEFA official match report</a>: Final score, timeline events, penalty failures, and player of the match.</li>
-<li><a href="https://theanalyst.com/articles/psg-vs-arsenal-champions-league-final-stats">Opta Analyst match report</a>: Shots, possession record, first-half pass fact, and shootout sequence.</li>
+    <li><a href="https://www.uefa.com/uefachampionsleague/news/02a5-20c02e59f219-15e92acdc717-1000--paris-retain-champions-league-holders-edge-arsenal-on-pena/">UEFA official match report</a>: Final score, timeline events, substitution list, penalty failures, and player of the match.</li>
+<li><a href="https://theanalyst.com/articles/psg-vs-arsenal-champions-league-final-stats">Opta Analyst match report</a>: Shots, possession record, pre-match win probability, first-half pass fact, and Vitinha&#x27;s Champions League profile.</li>
 <li><a href="https://www.si.com/soccer/arsenal-extend-unwanted-champions-league-record-after-heartbreaking-final-defeat">Sports Illustrated match-stat summary</a>: Completed-pass comparison and Opta possession note.</li>
+<li><a href="https://www.uefa.com/uefachampionsleague/news/02a5-20c0324a93c4-a269d65f5aeb-1000--vitinha-named-official-2026-uefa-champions-league-final-play/">UEFA Player of the Match article</a>: Vitinha official Player of the Match context.</li>
+<li><a href="https://www.vg.no/sport/i/L4Px4Q/champions-league-finalen-arsenal-leiren-reagerer-etter-omdiskutert-straffesituasjon-mot-psg">VG live report</a>: Penalty shootout sequence cross-check.</li>
   </ul>
 
   <p class="meta">Source check date: 2026-05-30. Generated from <code>run_ucl_final_match_control.py</code>.</p>
